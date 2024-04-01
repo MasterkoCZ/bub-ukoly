@@ -8,7 +8,7 @@
     <style>
         body {
             margin: 0;
-            overflow: hidden; /* Zabraňuje scrollování */
+            overflow: hidden; /* zákaz scrollu */
         }
     </style>
 </head>
@@ -28,14 +28,14 @@
         function setup() {
             createCanvas(windowWidth, windowHeight);
 
-            // Generování hvězd
+            // hvězdy - generování
             for (let i = 0; i < 50; i++) {
                 let x = random(width);
                 let y = random(height / 2);
                 stars.push({ x: x, y: y });
             }
 
-            // Generování mraků a stromů
+            // Stromy a mraky - generování
             for (let i = 0; i < 10; i++) {
                 let newCloudX = random(width);
                 let newCloudY = random(height / 4);
@@ -71,55 +71,55 @@
 
         function draw() {
             if (dayMode) {
-                background(135, 206, 250); // Světlá modrá pro den
+                background(135, 206, 250); // Obloha pro den
             } else {
-                background(25); // Černá pro noc
+                background(25); // Obloha pro noc
             }
 
             if (dayMode) {
-                fill(0, 128, 0); // Zelená pro trávu během dne
+                fill(0, 128, 0); // Tráva během dne
             } else {
-                fill(0, 100, 0); // Tmavě zelená pro trávu v noci
+                fill(0, 100, 0); // Tráva v noci
             }
             rect(0, height / 1.5 + 1, width, height / 2);
 
-            fill(100); // Stíněná barva pro silnici
+            fill(100);
             rect(0, height / 1.5 - 20, width, 80);
 
             if (dayMode) {
-                fill(255, 204, 0); // Žlutá pro slunce
+                fill(255, 204, 0); // Slunce
                 ellipse(100, 100, sunRadius * 2, sunRadius * 2);
-                // Žlutý glow pro slunce
+                // Glow slunce
                 let sunGlow = createGraphics(sunRadius * 2 + 100, sunRadius * 2 + 100);
                 sunGlow.noStroke();
-                sunGlow.fill(255, 204, 0, 100); // Částečně průhledný žlutý
+                sunGlow.fill(255, 204, 0, 100); // Průhlednost glowu
                 sunGlow.ellipse(sunRadius + 50, sunRadius + 50, sunRadius * 2 + 40, sunRadius * 2 + 40);
                 image(sunGlow, 100 - sunRadius - 50, 100 - sunRadius - 50);
             } else {
-                fill(255); // Bílá pro měsíc
+                fill(255); // Měsíc
                 ellipse(100, 100, moonRadius * 2, moonRadius * 2);
-                // Bílý glow pro měsíc
+                // Glow měsíce
                 let moonGlow = createGraphics(moonRadius * 2 + 100, moonRadius * 2 + 100);
                 moonGlow.noStroke();
-                moonGlow.fill(255, 255, 255, 100); // Částečně průhledný bílý
+                moonGlow.fill(255, 255, 255, 100); // Průhlednost glowu
                 moonGlow.ellipse(moonRadius + 50, moonRadius + 50, moonRadius * 2 + 40, moonRadius * 2 + 40);
                 image(moonGlow, 100 - moonRadius - 50, 100 - moonRadius - 50);
             }
 
-            fill(255, 0, 0); // Červená pro auto
+            fill(255, 0, 0); // Auto
             rect(carX, height / 1.5 - 30, 52, 26);
-            fill(0, 191, 255); // Modrá pro okna
+            fill(0, 191, 255); // Okna
             rect(carX + 7, height / 1.5 - 28, 18, 11, 5);
             rect(carX + 29, height / 1.5 - 28, 18, 11, 5);
-            fill(0); // Černá pro kola
+            fill(0); // Kola
             ellipse(carX + 13, height / 1.5 - 5, 10, 10);
             ellipse(carX + 39, height / 1.5 - 5, 10, 10);
 
-            fill(255, 204, 0); // Žlutá pro světlo
+            fill(255, 204, 0); // Světlo
             ellipse(carX + 50, height / 1.5 - 10, 5, 5);
             carX = (carX + 1) % (width + 52);
 
-            fill(255); // Bílá pro mraky
+            fill(255); // Mraky
             for (let i = 0; i < cloudX.length; i++) {
                 ellipse(cloudX[i], cloudY[i], 50, 20);
                 cloudX[i] -= 1;
@@ -132,13 +132,13 @@
             }
 
             for (let i = 0; i < treeX.length; i++) {
-                fill(139, 69, 19); // Hnědá pro kmeny stromů
+                fill(139, 69, 19); // Kmeny stromů
                 rect(treeX[i] - 5, height / 1.5 + 1 + 150 + treeY[i], 10, 30);
 
                 if (dayMode) {
-                    fill(0, 128, 0); // Světle zelená pro listy stromů během dne
+                    fill(0, 128, 0); // Listy stromů během dne
                 } else {
-                    fill(0, 100, 0); // Tmavě zelená pro listy stromů v noci
+                    fill(0, 100, 0); // Listy stromů během noci
                 }
                 ellipse(treeX[i], height / 1.5 + 1 + 150 + treeY[i] - 15, 40, 40);
                 treeX[i] -= 1;
@@ -152,7 +152,7 @@
 
             // Vykreslení hvězd
             if (!dayMode) {
-                fill(255); // Bílá pro hvězdy
+                fill(255); // Hvězdy
                 for (let i = 0; i < stars.length; i++) {
                     ellipse(stars[i].x, stars[i].y, 2, 2); // Malé bílé body
                 }
